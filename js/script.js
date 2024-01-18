@@ -12,6 +12,13 @@ playButton.addEventListener('click', function(){
     generateGride(gridCont);
 });
 
+// livello easy
+easyLevel.addEventListener("click", () => generateGride(100));
+// livello hard
+mediumLevel.addEventListener("click", () => generateGride(88));
+// livello hard
+hardLevel.addEventListener("click", () => generateGride(64));
+
 
 // Funzione x griglia
 
@@ -21,9 +28,8 @@ function generateGride(container){
     for(let i = 0; i < 100; i++){
         const squere = generateSquare();
         container.append(squere);
-    }
+    };
 }
-
 
 //  funzione x cella
 
@@ -31,8 +37,8 @@ function generateSquare(){
     const square = document.createElement(`div`);
     square.classList.add(`square`);
     square.addEventListener('click', function(){
-        this.classList.toggle('clicked');
+        this.classList.toggle('safe');
     });
-
     return square;
 }
+
