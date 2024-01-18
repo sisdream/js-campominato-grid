@@ -12,20 +12,27 @@ playButton.addEventListener('click', function(){
     generateGride(gridCont);
 });
 
-// LIVELLO EASY
-easyLevel.addEventListener("click", () => createGrid(100));
-// LIVELLO MEDIUM
-mediumLevel.addEventListener("click", () => createGrid(81));
-// LIVELLO HARD
-hardLevel.addEventListener("click", () => createGrid(49));
 
 // Funzione x griglia
 
 function generateGride(container){
     gridCont.innerHTML = '';
 
-    for(let i = 0; i < 46; i++){
+    for(let i = 0; i < 100; i++){
         const squere = generateSquare();
         container.append(squere);
     }
+}
+
+
+//  funzione x cella
+
+function generateSquare(){
+    const square = document.createElement(`div`);
+    square.classList.add(`square`);
+    square.addEventListener('click', function(){
+        this.classList.toggle('clicked');
+    });
+
+    return square;
 }
