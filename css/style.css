@@ -10,7 +10,7 @@ body{
 }
 
 header{
-    width: 800px;
+    width: 60rem;
     padding: 00 20px;
     display: flex;
     align-items: center;
@@ -38,4 +38,9 @@ button,
 .livelli{
     display: flex;
     align-items: center;
+}
+
+main{
+    background-color: cadetblue;
+    width: 60rem;
 }
