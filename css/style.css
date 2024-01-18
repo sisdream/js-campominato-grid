@@ -15,7 +15,6 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid black;
 }
 
 .logo{
@@ -41,6 +40,25 @@ button,
 }
 
 main{
-    background-color: cadetblue;
+    background-color: #5f9ea0;
+}
+
+
+.container{
+    border: 2px solid black;
     width: 60rem;
+    min-height: 40rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square{
+    width: calc(100% / 10);
+    aspect-ratio: 1;
+    border: 3px solid black;
+    cursor: pointer;
+}
+
+.square.safe{
+    background-color: #2893b7;
 }
