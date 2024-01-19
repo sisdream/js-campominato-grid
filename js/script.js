@@ -1,58 +1,69 @@
-// CREARE LE COSTANTI
-
+// CRAARE LE COSTATNTI
 const gridCont = document.getElementById("grid");
-const easyLevel = document.getElementById("easy");
-const mediumLevel = document.getElementById("medium");
-const hardLevel = document.getElementById("hard");
-const playButton = document.getElementById("play");
+const easyButton = document.getElementById("easy");
+const mediumButton = document.getElementById("medium");
+const hardButton = document.getElementById("hard");
 let points = 0;
-generateGride(gridCont);
 
-// EVENTO LEGATO AL CLICK
 
-playButton.addEventListener('click', function(){
-    generateGride(gridCont);
-});
+// LIVELLO FACILE
+easyButton.addEventListener("click", () => createGrid(100));
+// LIVELLO MEDIO
+mediumButton.addEventListener("click", () => createGrid(81));
+// LIVELLO DIFFICILE
+hardButton.addEventListener("click", () => createGrid(49));
 
-// FUNZIONE PER CREARE LA GRIGLIA
 
-function generateGride(container){
-    gridCont.innerHTML = '';
+// METODO PER CREARE LA GRIGLIA
+function createGrid(difficulty){  
+    gridCont.innerHTML = "";
+    const bombe = generaArrayBombe(difficulty);
 
-    for(let i = 1; i < 100 + 1; i++){
-        const squere = generateSquare(i);
-        container.append(squere);
-    }
+    for(let i = 1; i <= difficulty; i++){
+        let square = createElement("div", "square");
+        square.innerHTML = i;
+        square.addEventListener("click", () => controllaSeBomba(i, square, bombe));
+
+        gridCont.appendChild(square);
+    };
+};
+
+// METODO DI CONTROLLO PER I PUNTI
+function controllaSeBomba(squareIndex, square, bombe){
+    if(bombe.indexOf(squareIndex) !== -1){
+        square.classList.add("bomb");
+        alert(`Hai perso. Gioca ancora. Hai totalizzato: ${points} punti.`);
+        gridCont.innerHTML = "";
+        points = 0;
+    } else {
+        if(!square.classList.contains('safe')){                   
+            square.classList.add("safe");
+            points += 1;
+        };
+    };
 }
 
-//  FUNZIONE PER CREARE CELLA
-
-function generateSquare(text){
-    const square = document.createElement(`div`);
-    square.classList.add(`square`);
-    square.innerText = text;
-    square.addEventListener('click', function(){
-        this.classList.toggle('safe');
-    });
-    return square;
+// METODO PER CREARE IL SINGOLO ELEMENTO DELLA GRIGLIA
+function createElement(elementType, elementClass){
+    let newElement = document.createElement(elementType);
+    newElement.classList.add(elementClass);
+    
+    return newElement;
 }
 
 // METODO CHE GENERA UN NUMERO RANDOM
-
 function numeroRandom(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-// FUZIONE GENERA BOMBE
- 
-function generaBombe(max){
+// GENERATORE NUMERI UNIVOCI
+function generaArrayBombe(max){
     let arr = [];
 
-    while(arr.length < 16){
+    while(arr.length < 16) {
         let randomNum = numeroRandom(1, max);
         if(arr.indexOf(randomNum) === -1) arr.push(randomNum);
     };
-
     return arr;
 };
 
