@@ -8,11 +8,11 @@ const playButton = document.getElementById("play");
 let points = 0;
 generateGride(gridCont);
 
+// EVENTO LEGATO AL CLICK
 
 playButton.addEventListener('click', function(){
     generateGride(gridCont);
 });
-
 
 // FUNZIONE PER CREARE LA GRIGLIA
 
@@ -39,16 +39,16 @@ function generateSquare(text){
 
 // METODO CHE GENERA UN NUMERO RANDOM
 
-function numeroRandom(min, max) {
+function numeroRandom(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 // FUZIONE GENERA BOMBE
-
-function generaBombe(max) {
+ 
+function generaBombe(max){
     let arr = [];
 
-    while(arr.length < 16) {
+    while(arr.length < 16){
         let randomNum = numeroRandom(1, max);
         if(arr.indexOf(randomNum) === -1) arr.push(randomNum);
     };
