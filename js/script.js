@@ -43,3 +43,16 @@ function numeroRandom(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+// FUZIONE GENERA BOMBE
+
+function generaBombe(max) {
+    let arr = [];
+
+    while(arr.length < 16) {
+        let randomNum = numeroRandom(1, max);
+        if(arr.indexOf(randomNum) === -1) arr.push(randomNum);
+    };
+
+    return arr;
+};
+
