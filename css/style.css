@@ -76,3 +76,8 @@ main{
 .square.bomb{
     background-color: red;
 }
+
+#lost{
+    font-size: 2rem;
+    margin: 8px 0;
+}
