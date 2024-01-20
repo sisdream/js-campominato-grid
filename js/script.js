@@ -1,28 +1,42 @@
 // CRAARE LE COSTATNTI
 const gridCont = document.getElementById("grid");
-const easyButton = document.getElementById("easy");
-const mediumButton = document.getElementById("medium");
-const hardButton = document.getElementById("hard");
+const play = document.getElementById('play');
+const difficulty = document.getElementById('difficulty');
 let points = 0;
+let isGameOver = false;
+let bombe = [];
 
+play.addEventListener('click', function() {
+    isGameOver = false;
+    gridCont.innerHTML = "";
+    points = 0;
 
-// LIVELLO FACILE
-easyButton.addEventListener("click", () => createGrid(100));
-// LIVELLO MEDIO
-mediumButton.addEventListener("click", () => createGrid(81));
-// LIVELLO DIFFICILE
-hardButton.addEventListener("click", () => createGrid(49));
-
+    const value = parseInt(difficulty.value);
+    if (value === 1) {
+        createGrid(100, 'easy')
+    } else if (value === 2) {
+        createGrid(81, 'medium')
+    } else {
+        createGrid(49, 'hard');
+    }
+});
 
 // METODO PER CREARE LA GRIGLIA
-function createGrid(difficulty){  
+function createGrid(difficulty, difficultyString){
     gridCont.innerHTML = "";
-    const bombe = generaArrayBombe(difficulty);
+    bombe = generaArrayBombe(difficulty);
 
     for(let i = 1; i <= difficulty; i++){
         let square = createElement("div", "square");
+
+        square.classList.add(difficultyString);
         square.innerHTML = i;
-        square.addEventListener("click", () => controllaSeBomba(i, square, bombe));
+
+        square.addEventListener("click", () => {
+            if (!isGameOver) {
+                controllaSeBomba(i, square, bombe)
+            }
+        });
 
         gridCont.appendChild(square);
     };
@@ -32,9 +46,19 @@ function createGrid(difficulty){
 function controllaSeBomba(squareIndex, square, bombe){
     if(bombe.indexOf(squareIndex) !== -1){
         square.classList.add("bomb");
+        isGameOver = true;
+
+        // recuperare la lista di quadrati
+        const squareList = document.querySelectorAll(".square");
+            // controllare ogni quadrato se è una bomba
+        for (let i = 0; i < squareList.length; i++) {
+            const square = squareList[i];
+
+            if (bombe.indexOf(parseInt(square.innerText)) !== -1) {
+                square.classList.add('bomb');
+            }
+        }
         alert(`Hai perso. Gioca ancora. Hai totalizzato: ${points} punti.`);
-        gridCont.innerHTML = "";
-        points = 0;
     } else {
         if(!square.classList.contains('safe')){                   
             square.classList.add("safe");
@@ -66,4 +90,3 @@ function generaArrayBombe(max){
     };
     return arr;
 };
-

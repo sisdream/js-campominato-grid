@@ -10,8 +10,7 @@ body{
 }
 
 header{
-    width: 60rem;
-    padding: 00 20px;
+    width: 40rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -46,19 +45,34 @@ main{
 
 .container{
     border: 2px solid black;
-    width: 60rem;
-    min-height: 40rem;
+    width: 40rem;
+    aspect-ratio: 1;
     display: flex;
     flex-wrap: wrap;
 }
 
 .square{
-    width: calc(100% / 10);
     aspect-ratio: 1;
     border: 3px solid black;
     cursor: pointer;
 }
 
+.square.easy{
+    width: calc(100% / 10);
+}
+
+.square.medium{
+    width: calc(100% / 9);
+}
+
+.square.hard{
+    width: calc(100% / 7);
+}
+
 .square.safe{
     background-color: #2893b7;
+}
+
+.square.bomb{
+    background-color: red;
 }
